@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: '惠食生活圈',
+  navigationBarTitleText: '我的',
   // navigationStyle: 'custom',
   // navigationBarTextStyle: 'black'
 }

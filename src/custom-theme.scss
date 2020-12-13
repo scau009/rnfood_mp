@@ -1,0 +1,18 @@
+/* Custom Theme */
+$color-brand: #ec5d11;
+$color-brand-light: #f1864d;
+$color-brand-dark: #bd4a0e;
+
+@import "~taro-ui/dist/style/index";
+
+.color-main{
+  color: $color-brand;
+}
+
+.bg-main{
+  background: $color-brand;
+}
+
+.border-main{
+  border-color: $color-brand;
+}

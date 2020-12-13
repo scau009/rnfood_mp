@@ -1,0 +1,44 @@
+.user_info_block {
+  background: #ec5d11;
+  color: white;
+  padding: 40px;
+  border-bottom: 60px solid #ec5d11;
+  border-bottom-left-radius: 60%;
+
+  border-bottom-right-radius: 60%;
+
+  .avatar_image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .user_name {
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  .mobile {
+    font-size: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+}
+
+.content{
+  position: relative;
+  top: -80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  .trade_block{
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    .user_icon{
+      width: 80px;
+      height: 80px;
+    }
+  }
+}

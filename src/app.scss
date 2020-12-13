@@ -1,0 +1,90 @@
+.page{
+  padding-left: 40px;
+  padding-right: 40px;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+.bg-default{
+  background: #f8f8f8;
+}
+.text-mute{
+  color: #656d77;
+}
+.text-small{
+  font-size: 24px;
+}
+.text-right{
+  text-align: right;
+}
+.text-center{
+  text-align: center;
+}
+.line-through{
+  text-decoration: line-through;
+}
+.vh-100{
+  min-height: 100vh;
+}
+.ml-4{
+  margin-left: 40px;
+}
+.mr-4{
+  margin-right: 40px;
+}
+.mr-3{
+  margin-right: 30px;
+}
+.mt-1{
+  margin-top: 10px;
+}
+
+.mt-2{
+  margin-top: 20px;
+}
+.mr-2{
+  margin-right: 20px;
+}
+.mt-3{
+  margin-top: 30px;
+}
+
+.mt-4{
+  margin-top: 40px;
+}
+
+.mx-auto{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.at-tabs__item-underline{
+  width: 40% !important;
+  left: 30% !important;
+  padding-bottom: 2px;
+}
+
+.tab_bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 800;
+  .tab_bar_item {
+    padding: 10px 0;
+    text-align: center;
+  }
+  .buy_btn {
+    text-align: center;
+    color: #ffffff;
+    vertical-align: middle;
+    border-radius: 45px;
+    padding: 10px 0;
+    .price{
+      font-size: 48px;
+      font-weight: bold;
+    }
+  }
+}

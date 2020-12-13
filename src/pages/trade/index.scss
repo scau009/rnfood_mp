@@ -1,0 +1,35 @@
+.list_page{
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 40px;
+  min-height: 100vh;
+  .trade_item{
+    padding: 30px;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 30px;
+    .product_image_block{
+      width: 120px;
+      height: 120px;
+      image.product_image{
+        width: 120px;
+        height: 120px;
+        border-radius: 10px ;
+        overflow: hidden;
+      }
+    }
+    .product_title{
+      margin-left: 20px;
+      font-size: 28px;
+      font-weight: 400;
+      height: 100px;
+    }
+    .trade_btn{
+      display: inline-block;
+      font-size: 24px;
+      border-color: #ec5d11;
+      color: #ec5d11;
+    }
+  }
+}
+
