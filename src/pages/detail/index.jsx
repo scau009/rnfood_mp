@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import './index.scss'
 import Api from "../../apiClient/apiClient";
 import {LOGIN} from "../../constants/auth";
-import AuthDialog from "../compoment/auth";
+import LoginBtn from "../compoment/login/loginBtn";
 
 @connect(({ loginUpdater }) => ({
   loginUpdater
@@ -52,19 +52,10 @@ class Index extends Component {
     })
   }
 
-  handleGetUserInfo(e) {
-    let userInfo = e.detail.userInfo;
-    userInfo.mobile = '17724004428';
-    //弹出获取手机号的弹窗，授权手机号码
-    Taro.login().then((res)=>{
-      if (res.code) {
-        // this.setState({'isOpened': true});
-        Api.request('POST', '/api/auth/login', userInfo).then((response)=>{
-          console.log(response);
-          this.props.login();
-        }).catch();
-      }
-    });
+  goToLogin() {
+    Taro.switchTab({
+      url: '/pages/user/index',
+    })
   }
 
   handleGoHome() {
@@ -74,7 +65,7 @@ class Index extends Component {
   }
 
   render () {
-    const {product,isOpen} = {...this.state};
+    const {product} = {...this.state};
 
     console.error('product',product);
     return (<View className='detail_page'>
@@ -181,14 +172,11 @@ class Index extends Component {
             {
               this.props.loginUpdater.isLogin ? <AtButton type='primary' className='mr-3' onClick={this.handleBuy.bind(this)}>
                 <View><Text className='price'>￥{product.price}</Text> 立即抢购</View>
-              </AtButton> : <AtButton type='primary' className='mr-3' openType='getUserInfo' onGetUserInfo={this.handleGetUserInfo.bind(this)}>
-                登录抢购
-              </AtButton>
+              </AtButton> : <LoginBtn btnText='登录抢购' />
             }
           </View>
         </View>
       </View>
-      <AuthDialog isOpened={isOpen} />
     </View>);
   }
 }
