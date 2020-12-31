@@ -8,11 +8,16 @@ import './index.scss'
 
 export default class TradeItem extends Component {
 
-  render () {
+  goToTradeDetail(tid) {
+    Taro.navigateTo({
+      url:"/pages/trade/detail/index?tid="+tid
+    });
+  }
 
+  render () {
     const trade = this.props.trade;
     return (
-      <View className='trade_item'>
+      <View className='trade_item' onClick={this.goToTradeDetail.bind(this,trade.tid)}>
         <View className='at-row'>
           <View className='at-col text-small text-mute'>
             订单号 {trade.tid}
@@ -52,7 +57,6 @@ export default class TradeItem extends Component {
             </View>;
           })
         }
-
       </View>
     )
   }

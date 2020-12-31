@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import './index.scss'
 import {LOGIN} from "../../../constants/auth";
 import Api from "../../../apiClient/apiClient";
+import StoreItem from "../../compoment/storeItem";
 
 @connect(({ loginUpdater }) => ({
   loginUpdater
@@ -124,24 +125,7 @@ class Index extends Component {
       <View className='border-main block_title mt-4'>适用门店</View>
       {
         product.stores && product.stores.map(store=>{
-          return (
-            <View className='content_block mt-3'>
-              <View className='title'>{store.company.title}（{store.title}）</View>
-              <View className='at-row'>
-                <View className='at-col at-col-11'>
-                  <View className='text-small text-mute mt-2'>营业时间：{store.dayBegin} {store.timeBegin}-{store.dayEnd} {store.timeEnd}</View>
-                  <View className='text-small text-mute'>商家电话：{store.mobile}</View>
-                  <View className='text-small text-mute'>{store.province}{store.city}{store.area}{store.route}</View>
-                </View>
-                <View className='at-col at-col-1'>
-                  <View className='at-row at-row__direction--column at-row__justify--center'>
-                    <AtIcon value='phone' size='22' color='#ec5d11' />
-                    <AtIcon value='map-pin' className='mt-2' size='22' color='#ec5d11' />
-                  </View>
-                </View>
-              </View>
-            </View>
-          );
+          return <StoreItem store={store} />
         })
       }
 

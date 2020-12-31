@@ -5,6 +5,7 @@ export default {
     'pages/trade/index',
     'pages/detail/index',
     'pages/trade/create/index',
+    'pages/trade/detail/index',
   ],
   window: {
     backgroundTextStyle: 'light',

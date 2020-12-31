@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { View,Image,Button } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import {connect} from "react-redux";
-import { AtTabs, AtTabsPane, AtButton, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
-import Taro from '@tarojs/taro'
-import logo from "../../asset/image/logo-rnfood.png";
+import { AtTabs, AtTabsPane } from 'taro-ui'
 
 import './index.scss'
 import Api from "../../apiClient/apiClient";
@@ -51,6 +49,11 @@ class Index extends Component {
   handleClick (value) {
     this.setState({
       current: value
+    },()=>{
+      const {tradeList} = {...this.getStatusAndPage()};
+      if (tradeList.length <= 0) {
+        this.getList(this.state.current);
+      }
     })
   }
 
@@ -66,40 +69,42 @@ class Index extends Component {
     let status = '';
     let page = this.state.page_all;
     let end = false;
+    let tradeList = [];
     switch (this.state.current) {
       case 0:
         status = '';
         page = this.state.page_all;
         end = this.state.end_all;
+        tradeList = this.state.allTradeList;
         break;
       case 1:
         status = 'wait_pay';
         page = this.state.page_wait_pay;
         end = this.state.end_wait_pay;
-
+        tradeList = this.state.waitPayTradeList;
         break;
       case 2:
         status = 'paid';
         page = this.state.page_paid;
         end = this.state.end_paid;
-
+        tradeList = this.state.paidTradeList;
         break;
       case 3:
         status = 'finished';
         page = this.state.page_finished;
         end = this.state.end_finished;
-
+        tradeList = this.state.finishedTradeList;
         break;
       case 4:
         status = 'canceled';
         page = this.state.page_cancel;
         end = this.state.end_cancel;
-
+        tradeList = this.state.canceledTradeList;
         break;
       default:
         status = '';
     }
-    return {status:status,page:page,end:end};
+    return {status:status,page:page,end:end,tradeList:tradeList};
   }
 
   getList(index) {
@@ -107,7 +112,6 @@ class Index extends Component {
     if (end) {
       return;
     }
-    console.log("getList");
     Api.request("GET", "/api/trades/list", {page: page, status: status}).then((res) => {
       switch (index) {
         case 0:
@@ -153,8 +157,7 @@ class Index extends Component {
   }
 
   render () {
-    const {tabList,allTradeList} = {...this.state};
-    console.log('allTradeList',allTradeList);
+    const {tabList,allTradeList,waitPayTradeList,paidTradeList,finishedTradeList,canceledTradeList} = {...this.state};
     return (<View>
       {this.props.loginUpdater.isLogin ? <AtTabs current={this.state.current} tabList={tabList} onClick={this.handleClick.bind(this)}>
         <AtTabsPane current={this.state.current} index={0} >
@@ -167,10 +170,40 @@ class Index extends Component {
           </View>
         </AtTabsPane>
         <AtTabsPane current={this.state.current} index={1}>
-          <View className='bg-default'>标签页二的内容</View>
+          <View className='bg-default list_page' >
+            {
+              waitPayTradeList.length>0 && waitPayTradeList.map((trade)=>{
+                return <TradeItem trade={trade} />;
+              })
+            }
+          </View>
         </AtTabsPane>
         <AtTabsPane current={this.state.current} index={2}>
-          <View className='bg-default'>标签页三的内容</View>
+          <View className='bg-default list_page' >
+            {
+              paidTradeList.length>0 && paidTradeList.map((trade)=>{
+                return <TradeItem trade={trade} />;
+              })
+            }
+          </View>
+        </AtTabsPane>
+        <AtTabsPane current={this.state.current} index={3}>
+          <View className='bg-default list_page' >
+            {
+              finishedTradeList.length>0 && finishedTradeList.map((trade)=>{
+                return <TradeItem trade={trade} />;
+              })
+            }
+          </View>
+        </AtTabsPane>
+        <AtTabsPane current={this.state.current} index={4}>
+          <View className='bg-default list_page' >
+            {
+              canceledTradeList.length>0 && canceledTradeList.map((trade)=>{
+                return <TradeItem trade={trade} />;
+              })
+            }
+          </View>
         </AtTabsPane>
       </AtTabs> : <LoginPage />}
     </View>);
