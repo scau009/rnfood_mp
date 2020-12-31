@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {View, Image } from '@tarojs/components'
 import Taro  from '@tarojs/taro'
-import {AtButton, AtIcon, AtInputNumber,AtInput} from "taro-ui";
+import {AtButton, AtInputNumber,AtInput} from "taro-ui";
 
 import {connect} from "react-redux";
 import './index.scss'
@@ -49,22 +49,21 @@ class Index extends Component {
       number: this.state.number
     };
 
-    // Taro.showLoading({mask:true}).then(()=>{
-    //
-    //
-    // });
-
     Taro.showLoading();
     Api.request("POST","/api/trades/create",postData).then((res)=>{
       //跳转到
       console.log(res);
       Taro.hideLoading();
       if (res.wxOrder) {
-        Taro.requestPayment(res.wxOrder).then((rr)=>{
-          console.log('支付成功', rr);
-
+        const tid = res.trade.tid;
+        Taro.requestPayment(res.wxOrder).then(()=>{
+          Taro.showToast({title: "支付成功！",duration:2});
         }).catch((ee)=>{
           console.log('支付失败', ee);
+        }).finally(()=>{
+          Taro.navigateTo({
+            url: "/pages/trade/detail?tid=" + tid
+          })
         })
       }
 
